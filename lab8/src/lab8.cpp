@@ -1,108 +1,231 @@
-#include<stdio.h>
-#include<conio.h>
+#include<iostream>
 #include<string.h>
-#include<fstream.h>
-#include<iostream.h>
 #include<stdlib.h>
-
-class record
+#include<fstream>
+#include<sstream>
+#include<sys/types.h>
+#include<unistd.h>
+#include<vector>
+using namespace std;
+class mgrsrt
 {
 public:
-char name[20];
-char usn[20];
-}rec[20];
-
-fstream file[8];
-int no;
-char fname[8][8]={"1.txt","2.txt","3.txt","4.txt","5.txt","6.txt","7.txt","8.txt"};
-
-void merge_file(char* file1,char* file2,char* filename)
-{
-    record recd[20];
-    int i,k;
-    k=0;
-    fstream f1,f2;
-    f1.open(file1,ios::in);
-    f2.open(file2,ios::in);
-    while(!f1.eof())
-    {
-        f1.getline(recd[k].name,20,'|');
-        f1.getline(recd[k++].usn,20,'\n');
-    }
-    while(!f2.eof())
-    {
-        f2.getline(recd[k].name,20,'|');
-        f2.getline(recd[k++].usn,20,'\n');
-    }
-    int t,y;
-    record temp;
-    for(t=0;t<k-2;t++)
-    for(y=0;y<k-t-2;y++)
-    if(strcmp(recd[y].name,recd[y+1].name)>0)
-    {
-        temp=recd[y];
-        recd[y]=recd[y+1];
-        recd[y+1]=temp;
-    }
-    fstream temp1;
-    temp1.open(filename,ios::out);
-    for(t=1;t<k-1;t++)
-    temp1<<recd[t].name<<"|"<<recd[t].usn<<"\n";
-    f1.close();
-    f2.close();
-    temp1.close();
-return;
-}
-
-void kwaymerge()
-{
-    int i,k;
-    k=0;
-    char filename[7][20]={"11.txt","22.txt","33.txt","44.txt","111.txt","222.txt","1111.txt"};
-    for(i=0;i<8;i+=2)
-    {
-        merge_file(fname[i],fname[i+1],filename[k++]);
-    }
-    k=4;
-    for(i=0;i<4;i+=2)
-    {
-        merge_file(filename[i],filename[i+1],filename[k++]);
-    }
-    merge_file(filename[4],filename[5],filename[6]);
-    return;
-}
-
-
-int main()
-{
+    string fname[8];
+    string name[100];
+    string names[100];
     int i;
-    clrscr();
-    cout<<"enter no of records\n";
-    cin>>no;
-    cout<<"\nenter the details\n";
-    for(i=0;i<8;i++)
-    file[i].open(fname[i],ios::out);
-    for(i=0;i<no;i++)
+
+    int mergef()
     {
-        cout<<"Name:";
-        cin>>rec[i].name;
-        cout<<"Usn:";
-        cin>>rec[i].usn;
-        file[i%8]<<rec[i].name<<"|"<<rec[i].usn<<"\n";
+    	int i=0;
+        string buffer;
+        fstream fp1,fp2;
+        fp2.open("final.txt",ios::out|ios::app);
+        fp1.open("1.txt",ios::in);
+        while(!fp1.eof())
+        {
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+            /*fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("2.txt",ios::in);
+        while(!fp1.eof())
+        {
+	    //int pos=fp2.tellp();
+	  // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+            /*fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("3.txt",ios::in);
+        while(!fp1.eof())
+        {
+		//int pos=fp2.tellp();
+	   // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+            /*fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("4.txt",ios::in);
+        while(!fp1.eof())
+        {
+		//int pos=fp2.tellp();
+	  // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+            /*fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("5.txt",ios::in);
+        while(!fp1.eof())
+        {
+		//int pos=fp2.tellp();
+	 // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+           /* fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("6.txt",ios::in);
+        while(!fp1.eof())
+        {
+	//	int pos=fp2.tellp();
+	  // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+           /* fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("7.txt",ios::in);
+        while(!fp1.eof())
+        {
+	//	int pos=fp2.tellp();
+	  //  fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+           /* fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+        fp1.close();
+        fp1.open("8.txt",ios::in);
+        while(!fp1.eof())
+        {
+	//	int pos=fp2.tellp();
+	 // fp2.seekp(pos-2,ios::beg);
+            getline(fp1,buffer);
+            name[i]=buffer;
+            i++;
+            /*fp2<<buffer;
+            fp2<<endl;*/
+        }
+	i--;
+	cout<<"value of i : "<<i<<endl ;
+        fp1.close();
+        cout<<"content of name :"<<endl;
+        for(int j=0;j<i;j++)
+        	cout<<"name["<<j<<"] : "<<name[j]<<endl;
+        for(int k=0;k<i;k++)
+        {
+        	fp2<<name[k];
+        	fp2<<endl;
+        }
+        fp2.close();
+	return i;
     }
-    for(i=0;i<8;i++)
-    file[i].close();
-    kwaymerge();
-    fstream result;
-    result.open("1111.txt",ios::in);
-    cout<<"sorted records\n";
-    char name[20],usn[20];
-    for(i=0;i<no;i++)
+    void mgrsort(int j)
     {
-        result.getline(name,20,'|');
-        result.getline(usn,20,'\n');
-        cout<<"\nName:"<<name<<"\nUsn:"<<usn<<"\n";
+
+        cout<<"inside mgrsort"<<endl;
+	i=j;
+       cout<<"value of i : "<<i<<endl;
+        string buffer;
+	
+        //int rsize=0;
+        fstream fp1;
+        /*fp1.open("final.txt",ios::in);
+        cout<<"opened file"<<endl;
+        while(!fp1.eof())
+        {
+            getline(fp1,buffer);
+           // name.push_back(buffer);
+            name[i]=buffer;
+            i++;
+        }
+        fp1.close();
+        for(int k=0;k<i-1;k++)
+            cout<<"k["<<k<<"]"<<" : "<<name[k]<<endl;
+        int mid=(1+i)/2;*/
+        /*mgrsrt m1;
+        m1.*/mergesort(0,i-1);
+        cout<<"file sorted"<<endl;
+        fp1.open("final.txt",ios::out);
+        fp1.close();
+       
+        fp1.open("final.txt",ios::out|ios::app);
+        for(int k=0;k<i;k++)
+        {
+            fp1<<names[k];
+            fp1<<endl;
+        }
+        fp1.close();
     }
-    getch();
-    return 0;
+
+void merge(int l,int m,int r)
+{
+mgrsrt m1;
+    cout<<"inside merge"<<endl;
+    cout<<"content of name inside merge :"<<endl;
+	cout<<"value of l & r : "<<l<<" & "<<r<<endl;
+    for(int k=l;k<=r;k++)
+	cout<<name[k]<<endl;
+    int i=0,j=m+1,k=0,q;
+    while((i<=m)&&(j<=r))
+    {
+    	if(name[i]<=name[j])
+    	{
+    		names[k++]=name[i++];
+    	}
+    	else
+    		names[k++]=name[j++];
+    	if(i>m)
+    	{
+    		for(q=j;q<=r;q++)
+    			names[k++]=name[q];
+    	}
+    	else
+    	{
+    		for(q=i;q<=m;q++)
+    		    names[k++]=name[q];
+    	}
+    }
+	/* cout<<"content of names :"<<endl;
+                for(int j=0;j<k;j++)
+                	cout<<"names["<<j<<"] : "<<names[j]<<endl;*/
+}
+void mergesort(int l, int r)
+{
+    //cout<<"inside mergesort"<<endl;
+   /* mgrsrt m1;*/
+    if (l<r)
+    {
+	//cout<<"@"<<endl;
+        int m = (l+r)/2;
+        /*m1.*/mergesort(l, m);
+	//cout<<"@1"<<endl;
+        /*m1.*/mergesort(m+1, r);
+	//cout<<"@2"<<endl;
+        /*m1.*/merge(l,m,r);
+    }  
+}
+};
+int main()
+{	
+    int j;
+    mgrsrt m;
+    j=m.mergef();
+    m.mgrsort(j);
+    cout<<"file sorted"<<endl;
 }
